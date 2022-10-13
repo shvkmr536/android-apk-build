@@ -1,0 +1,12 @@
+FROM shvkmr536/sma-apk-build:1.1
+ENV VERSION=4.4
+RUN wget https://services.gradle.org/distributions/gradle-${VERSION}-all.zip -P /tmp
+RUN unzip -d /opt/gradle /tmp/gradle-${VERSION}-all.zip
+RUN ln -s /opt/gradle/gradle-${VERSION} /opt/gradle/latest
+#RUN echo 'export GRADLE_HOME=/opt/gradle/latest' >> /etc/profile.d/gradle.sh
+#RUN echo 'export PATH=${GRADLE_HOME}/bin:${PATH}' >> /etc/profile.d/gradle.sh
+ENV GRADLE_HOME=/opt/gradle/latest
+ENV PATH=$PATH:$GRADLE_HOME/bin
+#RUN chmod +x /etc/profile.d/gradle.sh
+#RUN /bin/bash -c "source /etc/profile.d/gradle.sh"
+RUN /bin/bash -c "gradle -v"
