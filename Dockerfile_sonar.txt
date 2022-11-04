@@ -1,0 +1,18 @@
+FROM shvkmr536/sma-apk-build:gradle-4.4
+ARG SONAR_SCANNER_HOME=/opt/sonar-scanner
+ENV SONAR_SCANNER_VERSION=4.7.0.2747
+
+RUN mkdir -p /downloads/sonarqube && \
+    cd /downloads/sonarqube && \
+    wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip && \
+    unzip sonar-scanner-cli-4.7.0.2747-linux.zip && \
+    mv sonar-scanner-4.7.0.2747-linux /opt/sonar-scanner
+RUN touch /etc/profile.d/sonar-scanner.sh
+#RUN echo 'export SONAR_SCANNER_HOME=/opt/sonar-scanner' >> /etc/profile.d/sonar-scanner.sh
+#RUN echo 'export PATH="$PATH:/opt/sonar-scanner/bin"' >> /etc/profile.d/sonar-scanner.sh
+ENV PATH=$PATH:/opt/sonar-scanner/bin
+RUN cat /etc/profile.d/sonar-scanner.sh
+RUN chmod +x /etc/profile.d/sonar-scanner.sh
+#RUN /bin/sh -c "source /etc/profile.d/sonar-scanner.sh"
+RUN env | grep PATH
+RUN /bin/sh -c "sonar-scanner -v"

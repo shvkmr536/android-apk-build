@@ -1,0 +1,61 @@
+=======================
+https://github.com/mingchen/docker-android-build-box/blob/master/Dockerfile
+
+https://hub.docker.com/r/mingc/android-build-box/
+
+==========================
+
+https://developer-archives.toradex.com/knowledge-base/how-to-setup-android-build-environment-using-docker
+
+
+
+https://stackoverflow.com/questions/31280753/installing-and-using-gradle-in-a-docker-image-container
+
+
+https://services.gradle.org/distributions/gradle-4.4-all.zip
+
+
+Sonar Scanner-4.7 : 
+https://techexpert.tips/sonarqube/sonarqube-scanner-installation-ubuntu-linux/
+
+=================
+
+docker pull mingc/android-build-box:master
+
+docker pull mingc/android-build-box
+
+docker pull mingc/android-build-box
+
+docker pull mingc/android-build-box:v1.3.0
+
+
+docker pull mingc/android-build-box
+guptasanchit90/android-gradle:latest
+
+docker pull mingc/android-build-box
+
+
+RUN curl -L https://services.gradle.org/distributions/gradle-2.2.1-all.zip -o gradle-2.2-bin.zip
+RUN apt-get install -y unzip
+RUN unzip gradle-2.2-bin.zip
+RUN echo 'export GRADLE_HOME=/app/gradle-2.2' >> $HOME/.bashrc
+RUN echo 'export PATH=$PATH:$GRADLE_HOME/bin' >> $HOME/.bashrc
+RUN /bin/bash -c "source $HOME/.bashrc"
+
+
+  VERSION=2.2.1
+  wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
+  unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
+  ln -s /opt/gradle/gradle-${VERSION} /opt/gradle/latest
+  RUN echo 'export GRADLE_HOME=/opt/gradle/latest' >> /etc/profile.d/gradle.sh
+  RUN echo 'export PATH=${GRADLE_HOME}/bin:${PATH} >> /etc/profile.d/gradle.sh
+  RUN chmod +x /etc/profile.d/gradle.sh
+  RUN /bin/bash -c "source /etc/profile.d/gradle.sh"
+  RUN gradle -v
+
+
+
+
+
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/lib/jvm/jre-1.8.0-openjdk/bin/
